@@ -9,13 +9,17 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\HasApiTokens;
 
 class AuthController extends Controller
 {
+    private $token = 'myapptoken';
+
+    use HasApiTokens;
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest', ['only' => ['create', 'login']]);
     }
 
     protected function create(RegisterRequest $request)
@@ -31,9 +35,9 @@ class AuthController extends Controller
         return $this->token($user);
     }
 
-    public function token($user)
+    private function token($user)
     {
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken(Hash::make($this->token))->plainTextToken;
 
         $response = [
             'user' => $user,
@@ -45,7 +49,7 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         return ['message' => 'Logged Out'];
     }
@@ -54,7 +58,7 @@ class AuthController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);

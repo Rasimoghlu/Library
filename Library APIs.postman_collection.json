@@ -31,12 +31,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/book",
+							"raw": "{{url}}/api/v1/book",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book"
 							]
 						},
@@ -67,7 +68,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\" : \"Book My Bookv5\",\n        \"authors\": [{\n            \"author_name\" : \"author51\"\n        },\n        {\n            \"author_name\" : \"author5_a\"\n        }]\n        \n}",
+							"raw": "{\n    \"name\" : \"Book My Bookv5\",\n        \"authors\": [{\n            \"author_name\" : \"author1\"\n        },\n        {\n            \"author_name\" : \"author2\"\n        }]\n        \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -75,12 +76,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/book",
+							"raw": "{{url}}/api/v1/book",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book"
 							]
 						},
@@ -111,7 +113,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\" : \"Book My Book3\",\n        \"authors\": [{\n            \"author_name\" : \"authora111\"\n        },\n        {\n            \"author_name\" : \"auddsathor2222\"\n        }]\n        \n}",
+							"raw": "{\n    \"name\" : \"Book My Book3\",\n        \"authors\": [{\n            \"author_name\" : \"author3\"\n        },\n        {\n            \"author_name\" : \"author4\"\n        }]\n        \n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,14 +121,15 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/book/59",
+							"raw": "{{url}}/api/v1/book/51",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book",
-								"59"
+								"51"
 							]
 						},
 						"description": "In this endpoint you can update only your books and book authors"
@@ -155,14 +158,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/book/76",
+							"raw": "{{url}}/api/v1/book/51",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book",
-								"76"
+								"51"
 							]
 						},
 						"description": "For the deleting book you can use this endpoint.\n\nThis endpoint taking only one parameter. (book id)"
@@ -227,12 +231,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/author-books/1",
+							"raw": "{{url}}/api/v1/author-books/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"author-books",
 								"1"
 							]
@@ -268,12 +273,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/api/book-house/51",
+							"raw": "{{url}}/api/v1/book-house/51",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book-house",
 								"51"
 							]
@@ -314,12 +320,13 @@
 							]
 						},
 						"url": {
-							"raw": "{{url}}/api/book-house/create",
+							"raw": "{{url}}/api/v1/book-house/create",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"api",
+								"v1",
 								"book-house",
 								"create"
 							]
@@ -377,12 +384,13 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/register",
+					"raw": "{{url}}/api/v1/register",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
+						"v1",
 						"register"
 					]
 				}
@@ -429,13 +437,49 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/login",
+					"raw": "{{url}}/api/v1/login",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
+						"v1",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/api/v1/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"logout"
 					]
 				}
 			},

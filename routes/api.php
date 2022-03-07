@@ -16,30 +16,31 @@ use App\Http\Controllers\Api\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::group(['prefix' => 'v1', 'as' => 'v1.', 'middleware' => 'throttle:5000,1'], function () {
 
-Route::post('register', [AuthController::class, 'create']);
-Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'create']);
+    Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
-    Route::post('logout', [AuthController::class, 'logout']);
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+        Route::post('logout', [AuthController::class, 'logout']);
 
-    Route::group([''], function() {
-        Route::resource('book', BookController::class)->except(['edit', 'create']);
-    });
+        // apiResource root for book.
+        Route::apiResource('book', BookController::class)->except(['edit', 'create']);
 
-    Route::group(['prefix' => 'author-books', 'as' => 'author-books.'], function() {
-        Route::controller(AuthorController::class)->group(function () {
-            Route::get('{author}','index');
-        });
-    });
-
-    Route::group(['prefix' => 'book-house', 'as' => 'book-house.'], function() {
-        Route::controller(BookHouseController::class)->group(function () {
-            Route::post('create','store');
-            Route::get('{bookHouse}', 'index');
-
+        // Route for Book Authors.
+        Route::group(['prefix' => 'author-books', 'as' => 'author-books.'], function () {
+            Route::controller(AuthorController::class)->group(function () {
+                Route::get('{author}', 'index');
+            });
         });
 
-    });
+        // Route for Book House.
+        Route::group(['prefix' => 'book-house', 'as' => 'book-house.'], function () {
+            Route::controller(BookHouseController::class)->group(function () {
+                Route::post('create', 'store');
+                Route::get('{bookHouse}', 'index');
+            });
+        });
 
+    });
 });
