@@ -44,17 +44,6 @@ class BookController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param BookUpdateRequest $request
