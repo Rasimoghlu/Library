@@ -11,8 +11,7 @@ trait UpdateAuthorTrait
     {
         $book->loadMissing('authors');
 
-        $bookAuthors = Author::whereIntegerInRaw('id', $book->authors->pluck('id'))->get();
-        $bookAuthors = $bookAuthors->getIterator();
+        $bookAuthors = $book->authors->getIterator();
 
         foreach ($authors as $author) {
             $current = $bookAuthors->current();
